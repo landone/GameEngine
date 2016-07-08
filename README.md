@@ -1,2 +1,2 @@
 # GameEngine
-Game engine using OpenG and SDL on C++
+Game engine using OpenGL and SDL on C++
