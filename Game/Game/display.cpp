@@ -1,6 +1,7 @@
 #include "display.h"
 #include <iostream>
 #include "GL/glew.h"
+#include "Events.h"
 
 static Display global_disp;
 Display* Display::Global() {
@@ -83,27 +84,21 @@ void Display::Update() {
 					SDL_SetRelativeMouseMode(SDL_TRUE);
 				}
 			}
-			if (call_KeyEvent != NULL) {
-				call_KeyEvent(key, true);
-			}
+			Events::Send_KeyEvent(key, true);
 		}
 		if (e.type == SDL_KEYUP) {
 			SDL_Keycode key = e.key.keysym.sym;
-			if (call_KeyEvent != NULL) {
-				call_KeyEvent(key, false);
-			}
+			Events::Send_KeyEvent(key, false);
 			//if (key == SDLK_F11 && button_fscreen) { button_fscreen = false; }
 		}
 		if (e.type == SDL_MOUSEMOTION) {
-			if (call_MouseMotion != NULL) {
-				call_MouseMotion(e.motion.xrel, e.motion.yrel);
-			}
+			Events::Send_MouseMotion(e.motion.xrel, e.motion.yrel);
 		}
-		if (e.type == SDL_MOUSEBUTTONDOWN && call_MouseClick != NULL) {
-			call_MouseClick(e.button.x, e.button.x, (int)e.button.button);
+		if (e.type == SDL_MOUSEBUTTONDOWN) {
+			Events::Send_MouseClick(e.button.x, e.button.y, (int)e.button.button);
 		}
-		if (e.type == SDL_MOUSEBUTTONUP && call_MouseRelease != NULL) {
-			call_MouseRelease((int)e.button.button);
+		if (e.type == SDL_MOUSEBUTTONUP) {
+			Events::Send_MouseRelease((int)e.button.button);
 		}
 		if (e.type == SDL_QUIT) {
 			isClosed = true;

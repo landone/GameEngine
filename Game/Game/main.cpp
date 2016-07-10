@@ -6,6 +6,7 @@
 #include "Spotlight.h"
 #include "Sprite.h"
 #include "display.h"
+#include "Player.h"
 #include "EZServer.h"
 #include "EZClient.h"
 
@@ -23,6 +24,7 @@ Prop prop;
 Ambient amb;
 Spotlight spot;
 Sprite sprite;
+Player player;
 
 int main() {
 	//Server server("192.168.0.4", 333, 24);
@@ -53,6 +55,9 @@ int main() {
 		display->Clear(0.5, 0.5, 0.5, 1);
 		//prop.Update();
 		//img.Draw();
+		player.ApplyVelocity();
+		player.Update();
+		spot.Teleport(player.GetEyePos());
 		spot.SetDirection(camera->GetForward());
 		sprite.Draw();
 		prism.Draw();

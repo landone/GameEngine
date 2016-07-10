@@ -120,9 +120,11 @@
   <ItemGroup>
     <ClCompile Include="Ambient.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="ComFunc.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Events.cpp" />
     <ClCompile Include="EZClient.cpp" />
     <ClCompile Include="EZServer.cpp" />
     <ClCompile Include="EZSockets.cpp" />
@@ -142,9 +144,11 @@
   <ItemGroup>
     <ClInclude Include="Ambient.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="ComFunc.h" />
     <ClInclude Include="Console.h" />
     <ClInclude Include="display.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Events.h" />
     <ClInclude Include="EZClient.h" />
     <ClInclude Include="EZServer.h" />
     <ClInclude Include="EZSockets.h" />

@@ -5,10 +5,11 @@
 #include "camera.h"
 #include "shader.h"
 #include "transform.h"
+#include "Events.h"
 
 #define TICK	10
 
-class Entity {
+class Entity : public Listener {
 public:
 	Entity();
 	~Entity();

@@ -2,7 +2,7 @@
 #include "Entity.h"
 #include <map>
 
-static enum {
+enum {
 	TRANSFORM_U,
 	POSIFORM_U,
 	EFFECT_U,
@@ -59,7 +59,7 @@ void Shader::RemoveAmbient(char* temp) {
 		return;
 	}
 	int size = ambients.size();
-	for (unsigned int i = id; i < size - 1; i++) {
+	for (int i = id; i < size - 1; i++) {
 		ambientID[i] = ambientID[i + 1];
 		ambients[i] = ambients[i + 1];
 		ambientc[i] = ambientc[i + 1];
@@ -111,7 +111,7 @@ void Shader::RemoveSpotlight(char* temp) {
 		return;
 	}
 	int size = spots.size();
-	for (unsigned int i = id; i < size - 1; i++) {
+	for (int i = id; i < size - 1; i++) {
 		spotID[i] = spotID[i + 1];
 		spots[i] = spots[i + 1];
 		spotc[i] = spotc[i + 1];
