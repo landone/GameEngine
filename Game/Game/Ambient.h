@@ -2,6 +2,11 @@
 
 #include "Entity.h"
 
+/*
+		AMBIENT
+Basic spherical light
+*/
+
 class Ambient : public Entity {
 public:
 	Ambient();

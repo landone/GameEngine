@@ -4,6 +4,12 @@
 #undef main
 #include <string>
 
+/*
+		DISPLAY
+Creates a window for OpenGL
+Manages input events
+*/
+
 class Display {
 public:
 	Display() {}

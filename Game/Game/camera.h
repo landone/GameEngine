@@ -3,6 +3,11 @@
 #include "glm/glm.hpp"
 #include "glm/gtx/transform.hpp"
 
+/*
+				CAMERA
+Major difference between 2D and 3D drawing
+*/
+
 #define PI		3.1415926535f
 
 class Camera{

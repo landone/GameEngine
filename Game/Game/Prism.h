@@ -2,6 +2,13 @@
 
 #include "Wall.h"
 
+/*
+		PRISM
+Groups of walls in a prism
+Individual walls are selectable
+X-AXIS ROTATION DOES NOT WORK CURRENTLY
+*/
+
 class Prism : public Entity {
 public:
 	Prism(double width = 1, double height = 1, double depth = 1);

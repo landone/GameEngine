@@ -3,6 +3,11 @@
 #include "Entity.h"
 #include "Image.h"
 
+/*
+				SPRITE
+3D image that rotates to always face the camera
+*/
+
 class Sprite : public Entity {
 public:
 	Sprite(Texture& tex, double w = 1, double h = 1) {

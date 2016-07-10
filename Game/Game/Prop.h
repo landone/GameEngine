@@ -4,6 +4,11 @@
 #include "texture.h"
 #include "mesh.h"
 
+/*
+	PROP
+Basic model class
+*/
+
 class Prop : public Entity {
 public:
 	virtual void Draw();

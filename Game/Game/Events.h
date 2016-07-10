@@ -1,7 +1,11 @@
 #pragma once
 
-#include <map>
 #include <SDL2\SDL_keycode.h>
+
+/*
+		EVENTS & LISTENERS
+Allow any class to listen to events or send events.
+*/
 
 enum EventType {
 	Evt_MouseMotion = 1,

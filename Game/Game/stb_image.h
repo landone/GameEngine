@@ -1,3 +1,9 @@
+/*
+				STB_IMAGE
+Foreign file that loads images into usable textures
+*/
+
+
 ////   begin header file  ////////////////////////////////////////////////////
 //
 // Limitations:

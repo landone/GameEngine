@@ -3,6 +3,12 @@
 #include <string>
 #include "GL/glew.h"
 
+/*
+			TEXTURE
+Contains information of an image
+Prevents loading unnecessary copies of images
+*/
+
 class Texture {
 public:
 	void Load(const std::string& fileName);

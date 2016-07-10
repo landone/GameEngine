@@ -5,6 +5,12 @@
 #include <vector>
 #include <string>
 
+/*
+		OBJ_LOADER
+Courtesy of thebennybox on Youtube
+Loads obj files and creates meshes
+*/
+
 struct OBJIndex
 {
 	unsigned int vertexIndex;

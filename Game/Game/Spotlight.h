@@ -2,6 +2,11 @@
 
 #include "Entity.h"
 
+/*
+		SPOTLIGHT
+Light that points in a direction spherically
+*/
+
 class Spotlight : public Entity {
 public:
 	Spotlight();

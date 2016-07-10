@@ -1,7 +1,7 @@
 #pragma once
 /*
-	COMMON FUNCTIONS
-Mostly mathematical operations.
+		COMMON FUNCTIONS
+Mostly mathematical operations to organize code
 */
 
 #include <glm\glm.hpp>

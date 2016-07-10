@@ -2,6 +2,11 @@
 
 #include "Entity.h"
 
+/*
+					PLAYER
+Client-side player class for all player interactions
+*/
+
 class Player : public Entity {
 public:
 	Player();

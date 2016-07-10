@@ -3,6 +3,12 @@
 #include "EZSockets.h"
 #include <time.h>
 
+/*
+		EZSERVER
+TDP threaded server with basic functions & callbacks
+Built-in timeout functionality
+*/
+
 struct ServInd {
 	int server;
 	int index;

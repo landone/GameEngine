@@ -6,6 +6,13 @@
 #include <string>
 #include <iostream>
 
+/*
+			EZSOCKETS
+Application of Windows TDP sockets
+Quite messy alone | Organized into Client & Server
+IMPORTANT :		InitWSA() & CleanupWSA()
+*/
+
 enum Packet {
 	Packet_ERROR,
 	Packet_PING,

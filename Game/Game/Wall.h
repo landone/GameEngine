@@ -4,6 +4,11 @@
 #include "mesh.h"
 #include "texture.h"
 
+/*
+		WALL
+Basic rectangular plane
+*/
+
 class Wall : public Entity {
 public:
 	Wall(double width = 1, double height = 1, double texX = 1, double texY = 1);

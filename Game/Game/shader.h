@@ -6,6 +6,13 @@
 #include "transform.h"
 #include "camera.h"
 
+/*
+				SHADER
+Loads programs that control final graphic changes
+Globally used
+Tracks ambients & spotlights
+*/
+
 class Shader {
 public:
 	void Init(const std::string& fileName);

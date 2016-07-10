@@ -4,6 +4,12 @@
 #include <time.h>
 #include <iostream>
 
+/*
+		EZCLIENT
+TDP client with basic socket functions
+Built-in timeout functionality
+*/
+
 class Client {
 public:
 	Client() {}

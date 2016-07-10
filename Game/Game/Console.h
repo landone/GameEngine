@@ -3,6 +3,11 @@
 #include <iostream>
 #include <string>
 
+/*
+		CONSOLE
+Static class for optimized printing
+*/
+
 class Console {
 public:
 	static void SetColor(int value);

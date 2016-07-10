@@ -6,6 +6,13 @@
 #include "Console.h"
 #include <vector>
 
+/*
+			MESH
+A model with no worldly properties
+Base class of a prop and other visuals
+Prevents loading unnecessary copies of models
+*/
+
 struct Vertex {
 	glm::vec3 position;
 	glm::vec3 normal;

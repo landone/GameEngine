@@ -7,6 +7,11 @@
 #include "texture.h"
 #include "mesh.h"
 
+/*
+			IMAGE
+Image that can be drawn 2D or 3D
+*/
+
 class Image {
 public:
 	Image();

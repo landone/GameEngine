@@ -7,6 +7,11 @@
 #include "transform.h"
 #include "Events.h"
 
+/*
+			ENTITY
+Parent class for most game objects
+*/
+
 #define TICK	10
 
 class Entity : public Listener {
