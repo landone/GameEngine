@@ -36,3 +36,27 @@ double ComFunc::GetAngle(glm::vec2 origin, glm::vec2 targ) {
 glm::vec2 ComFunc::GetXZ(glm::vec3 temp) {
 	return glm::vec2(temp.x, temp.z);
 }
+
+glm::vec3 ComFunc::LinePlaneIntersect(glm::vec3 normal, glm::vec3 planePoint, glm::vec3 line, glm::vec3 origin) {
+	//origin + t * line = v
+	//normal * v = d
+
+	/*double d = glm::dot(planePoint, normal);
+	double t = (d - glm::dot(origin, normal)) / glm::dot(line, normal);
+	return origin + line * (float)t;*/
+
+	float check = glm::dot(line, normal);
+	if (check == 0) {//If never intersects, return origin
+		return origin;
+	}
+	return origin + line * (glm::dot(planePoint - origin, normal) / check);
+}
+
+bool ComFunc::IsPointOnFace(glm::vec3 point, glm::vec3 v1, glm::vec3 v2, glm::vec3 v3) {
+	double rem1 = glm::dot(point, v2 - v1), rem2 = glm::dot(point, v3 - v1);
+	if (glm::dot(v1, v2 - v1) <= rem1 && rem1 <= glm::dot(v2, v2 - v1) &&
+		glm::dot(v1, v3 - v1) <= rem2 && rem2 <= glm::dot(v3, v3 - v1)) {
+		return true;
+	}
+	return false;
+}

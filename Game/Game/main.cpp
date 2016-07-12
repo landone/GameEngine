@@ -9,6 +9,8 @@
 #include "Player.h"
 #include "EZServer.h"
 #include "EZClient.h"
+#include "World.h"
+#include "ComFunc.h"
 
 FILE _iob[] = { *stdin, *stdout, *stderr };
 extern "C" FILE * __cdecl __iob_func(void) { return _iob; }
@@ -30,7 +32,6 @@ int main() {
 	//Server server("192.168.0.4", 333, 24);
 	//server.CallbackString(OnString);
 	camera = Camera::Global();
-	camera->Init(glm::vec3(0, 0, 0), 70.0f, 16.0/9.0, 0.01f, 1000.0f);
 	shade = Shader::Global();
 	shade->Init("./res/shader2");
 	tex.Load("./res/tex/cuboid.jpg");
@@ -50,13 +51,13 @@ int main() {
 	sprite.Init(bg);
 	sprite.Teleport(3, 0.5, 2);
 
+	player.Move(0, 0.3, 0);
+
 	while (display->IsOpen()) {
 		times += 0.01;
 		display->Clear(0.5, 0.5, 0.5, 1);
 		//prop.Update();
 		//img.Draw();
-		player.ApplyVelocity();
-		player.Update();
 		spot.Teleport(player.GetEyePos());
 		spot.SetDirection(camera->GetForward());
 		sprite.Draw();
@@ -64,6 +65,9 @@ int main() {
 		prop.Draw();
 		prop.Teleport(0, cos(times), sin(times) - 4);
 		prop.SetRotation(0, sin(times), cos(times));
+		player.ApplyVelocity();
+		World::CalcCollisions();
+		player.Update();
 		display->Update();
 	}
 	return 0;

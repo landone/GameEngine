@@ -91,6 +91,9 @@
     <ClCompile Include="ComFunc.cpp">
       <Filter>Game\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Game\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="display.h">
@@ -160,6 +163,9 @@
       <Filter>Game\Engine</Filter>
     </ClInclude>
     <ClInclude Include="ComFunc.h">
+      <Filter>Game\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
       <Filter>Game\Engine</Filter>
     </ClInclude>
   </ItemGroup>

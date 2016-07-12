@@ -1,10 +1,13 @@
 #include "Player.h"
 #include "Events.h"
 #include "ComFunc.h"
+#include "World.h"
 
 Player::Player() {
 	Events::Listen(Evt_MouseMotion, this);
 	Events::Listen(Evt_KeyEvent, this);
+	camera->Init(glm::vec3(0, height, 0), 70.0f, 16.0 / 9.0, 0.01f, 1000.0f);
+	World::SetPlayer(this);
 }
 
 void Player::MouseMotion(double x, double y) {

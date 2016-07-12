@@ -1,4 +1,5 @@
 #include "Wall.h"
+#include "World.h"
 
 Wall::Wall(double w, double h, double x, double y) {
 	width = w;
@@ -19,6 +20,21 @@ Wall::Wall(double w, double h, double x, double y) {
 	v[0].normal = normal; v[1].normal = normal; v[2].normal = normal; v[3].normal = normal;
 
 	mesh.Init(v, in);
+	SetSize(w, h);
+	World::RegWall(this);
+}
+
+Wall::~Wall() {
+	World::RemoveWall(this);
+}
+
+glm::vec3 Wall::GetVert(int index) {
+	if (index < 0 || index > 3) { index = 0; }
+	return glm::vec3(transform.GetModel() * glm::vec4(v[index].position, 1));
+}
+
+glm::vec3 Wall::GetNormal() {
+	return normal;
 }
 
 void Wall::UpdateTexture() {
@@ -80,4 +96,20 @@ void Wall::SetTex(const std::string& path) {
 
 void Wall::SetTex(Texture& tex) {
 	texture = tex;
+}
+
+void Wall::CalcNormal() {//Saves some processing for collisions
+	normal = glm::normalize(glm::vec3(transform.GetModel() * glm::vec4(v[0].normal, 1)) - position);
+}
+
+void Wall::SetRotation(glm::vec3 rot) {
+	rotation = rot;
+	transform.SetRot(rot);
+	CalcNormal();
+}
+
+void Wall::Rotate(glm::vec3 amount) {
+	rotation += amount;
+	transform.SetRot(rotation);
+	CalcNormal();
 }

@@ -34,6 +34,7 @@ public:
 	virtual void SetRotation(glm::vec3 rot); virtual void SetRotation(double x, double y, double z);
 	virtual void Rotate(glm::vec3 amount); virtual void Rotate(double x, double y, double z);
 	virtual void SetScale(double factor); virtual void Scale(double factor);
+	virtual void SetVel(glm::vec3 amt) { velocity = amt; } virtual void SetVel(double x, double y, double z) { SetVel(glm::vec3(x,y,z)); }
 
 	virtual void Enable();
 	virtual void Disable();
