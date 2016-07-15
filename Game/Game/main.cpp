@@ -1,3 +1,4 @@
+#include <SDL2\SDL_mixer.h>
 #include "Console.h"
 #include "Prism.h"
 #include "Image.h"
@@ -10,6 +11,7 @@
 #include "EZServer.h"
 #include "EZClient.h"
 #include "World.h"
+#include "Sound.h"
 #include "ComFunc.h"
 
 FILE _iob[] = { *stdin, *stdout, *stderr };
@@ -38,6 +40,7 @@ int main() {
 	//server.CallbackString(OnString);
 	srand((unsigned int)time(NULL));//Basically enables random number generations
 	Display* display = Display::MakeGlobal(1600, 900, "VIDYA GAEM");
+	if (Mix_OpenAudio(32000, MIX_DEFAULT_FORMAT, 2, 1024) < 0) { std::cout << "ERROR: MixOpenAudio: " << Mix_GetError() << std::endl; }
 	Shader::Global()->Init("./res/shader2");
 	Texture tex, bg, chair;
 	Prism prism(10, 10, 10);
@@ -46,6 +49,10 @@ int main() {
 	Spotlight spot;
 	Sprite sprite;
 	Player player;
+
+	Sound snd;
+	snd.Load("./res/sound/error.wav");
+	snd.Teleport(10, 10, 10);
 
 	tex.Load("./res/tex/cuboid.jpg");
 	bg.Load("./res/tex/blueprint.jpg");
@@ -68,5 +75,9 @@ int main() {
 	while (display->IsOpen()) {
 		World::Update();
 	}
+	Sound::UnloadAll();
+	Texture::UnloadAll();
+	Mesh::UnloadAll();
+	Mix_CloseAudio();
 	return 0;
 }

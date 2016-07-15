@@ -94,6 +94,9 @@
     <ClCompile Include="World.cpp">
       <Filter>Game\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>Game\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="display.h">
@@ -166,6 +169,9 @@
       <Filter>Game\Engine</Filter>
     </ClInclude>
     <ClInclude Include="World.h">
+      <Filter>Game\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
       <Filter>Game\Engine</Filter>
     </ClInclude>
   </ItemGroup>

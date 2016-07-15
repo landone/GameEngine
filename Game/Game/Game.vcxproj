@@ -136,6 +136,7 @@
     <ClCompile Include="Prism.cpp" />
     <ClCompile Include="Prop.cpp" />
     <ClCompile Include="shader.cpp" />
+    <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Spotlight.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="texture.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Prism.h" />
     <ClInclude Include="Prop.h" />
     <ClInclude Include="shader.h" />
+    <ClInclude Include="Sound.h" />
     <ClInclude Include="Spotlight.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="stb_image.h" />

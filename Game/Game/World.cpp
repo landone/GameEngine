@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Spotlight.h"
 #include "ComFunc.h"
+#include "Sound.h"
 #include <vector>
 #include <algorithm>
 
@@ -39,9 +40,9 @@ void World::Update() {
 
 void World::Test() {//DEBUG FUNCTION
 	for (Entity* ent : entities) {
-		if (ent->GetClassname() == "Spotlight") {
-			Spotlight* spot = (Spotlight*)ent;
-			spot->SetColor(ComFunc::GetRandomDouble(0.0, 1.0), ComFunc::GetRandomDouble(0.0, 1.0), ComFunc::GetRandomDouble(0.0, 1.0));
+		if (ent->GetClassname() == "Sound") {
+			Sound* snd = (Sound*)ent;
+			snd->Play();
 		}
 	}
 }

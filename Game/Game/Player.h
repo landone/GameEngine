@@ -10,6 +10,7 @@ Client-side player class for all player interactions
 class Player : public Entity {
 public:
 	Player();
+	static Player* Global();
 	virtual void ApplyVelocity();
 
 	virtual void Move(glm::vec3 amount); virtual void Move(double x, double y, double z) { Move(glm::vec3(x, y, z)); }
