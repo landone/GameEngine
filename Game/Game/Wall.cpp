@@ -2,6 +2,7 @@
 #include "World.h"
 
 Wall::Wall(double w, double h, double x, double y) {
+	classname = "Wall";
 	width = w;
 	height = h;
 	texX = w / x;

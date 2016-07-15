@@ -1,4 +1,5 @@
 #include "ComFunc.h"
+#include <time.h>
 
 #define PI		3.1415926535f
 
@@ -59,4 +60,12 @@ bool ComFunc::IsPointOnFace(glm::vec3 point, glm::vec3 v1, glm::vec3 v2, glm::ve
 		return true;
 	}
 	return false;
+}
+
+double ComFunc::GetRandomDouble(double min, double max) {
+	return sin((double)rand())*(max - min) + min;
+}
+
+int ComFunc::GetRandomInt(int min, int max) {
+	return (int)round(GetRandomDouble(min, max));
 }

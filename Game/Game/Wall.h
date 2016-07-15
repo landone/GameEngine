@@ -34,6 +34,8 @@ public:
 	virtual void Rotate(glm::vec3 amount); virtual void Rotate(double x, double y, double z) { Rotate(glm::vec3(x, y, z)); }
 
 	virtual glm::vec3 GetVert(int index);
+
+	bool prismPart = false;
 protected:
 	Texture texture;
 	Mesh mesh;

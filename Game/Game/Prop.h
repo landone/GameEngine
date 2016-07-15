@@ -11,6 +11,7 @@ Basic model class
 
 class Prop : public Entity {
 public:
+	Prop();
 	virtual void Draw();
 	virtual void SetMesh(const std::string& path); virtual void SetMesh(Mesh& mesh);
 	virtual Mesh& GetMesh() { return mesh; }

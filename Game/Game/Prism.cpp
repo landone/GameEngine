@@ -1,7 +1,14 @@
 #include "Prism.h"
 
 Prism::Prism(double w, double h, double d) {
+	classname = "Prism";
 	dimensions = glm::vec3(w, h, d);
+	walls[0].prismPart = true;
+	walls[1].prismPart = true;
+	walls[2].prismPart = true;
+	walls[3].prismPart = true;
+	walls[4].prismPart = true;
+	walls[5].prismPart = true;
 	walls[0].SetSize(w, d);
 	walls[0].SetRotation(PI / 2, 0, 0);
 	walls[1].SetSize(d, h);

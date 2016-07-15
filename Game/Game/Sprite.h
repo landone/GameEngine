@@ -11,9 +11,10 @@
 class Sprite : public Entity {
 public:
 	Sprite(Texture& tex, double w = 1, double h = 1) {
+		classname = "Sprite";
 		Init(tex, w, h);
 	}
-	Sprite() {}
+	Sprite() { classname = "Sprite"; }
 
 	virtual void Init(Texture& tex, double w = 1, double h = 1) {
 		width = w; height = h;

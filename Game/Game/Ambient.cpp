@@ -2,6 +2,7 @@
 
 Ambient::Ambient() {
 	SendData();
+	classname = "Ambient";
 }
 
 Ambient::~Ambient() {

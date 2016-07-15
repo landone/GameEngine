@@ -1,7 +1,8 @@
 #include "Entity.h"
+#include "World.h"
 
 Entity::Entity() {
-	
+	World::RegEnt(this);
 }
 
 Entity::~Entity() {
@@ -9,11 +10,8 @@ Entity::~Entity() {
 }
 
 void Entity::Update() {
-	if (enabled && clock() > ticks + TICK) {
-		if (velocity.x != 0 || velocity.y != 0 || velocity.z != 0) {//Faster than finding length of vector
-			Move(velocity);
-		}
-		ticks = clock();
+	if (velocity.x != 0 || velocity.y != 0 || velocity.z != 0) {//Faster than finding length of vector
+		Move(velocity);
 	}
 }
 

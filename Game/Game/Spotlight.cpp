@@ -1,6 +1,7 @@
 #include "Spotlight.h"
 
 Spotlight::Spotlight() {
+	classname = "Spotlight";
 	SendData();
 }
 

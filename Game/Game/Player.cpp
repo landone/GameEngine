@@ -8,6 +8,7 @@ Player::Player() {
 	Events::Listen(Evt_KeyEvent, this);
 	camera->Init(glm::vec3(0, height, 0), 70.0f, 16.0 / 9.0, 0.01f, 1000.0f);
 	World::SetPlayer(this);
+	classname = "Player";
 }
 
 void Player::MouseMotion(double x, double y) {
@@ -31,44 +32,38 @@ void Player::KeyEvent(SDL_Keycode key, bool press) {
 		buttons[3] = press;
 		break;
 	case SDLK_SPACE:
+		if (!buttons[4] && press) {
+			velocity.y += (float)jumpBoost;
+		}
+		buttons[4] = press;
 		break;
 	}
 }
 
 void Player::ApplyVelocity() {
-	if (enabled && clock() > ticks + TICK) {
-		int forward = (int)buttons[0] - (int)buttons[2];
-		int sides = (int)buttons[3] - (int)buttons[1];
-		if (forward != 0 || sides != 0) {//Move based off facing direction & buttons
-			double angle = ComFunc::GetAngle(glm::vec2(0, 0), ComFunc::GetXZ(camera->GetForward()));
-			glm::vec3 result(cos(angle)*forward + cos(angle + PI/2)*sides, 0, sin(angle)*forward + sin(angle + PI/2)*sides);
-			result = glm::normalize(result) * (float)walkAccel;
-			velocity += result;
-			double dot = glm::dot(result, glm::normalize(velocity));
-			if (glm::length(velocity) > maxWalkSpeed && dot > 0) {
-				velocity -= glm::normalize(velocity) * (float)dot;
-			}
-		}
-		if (onGround && (velocity.x != 0 || velocity.z != 0)) {//Apply friction
-			glm::vec3 result(velocity.x, 0, velocity.z);
-			glm::vec3 remember = velocity;
-			result = glm::normalize(result) * (float)friction;
-			velocity -= result;
-			if (remember.x > 0 && velocity.x < 0) { velocity.x = 0; }
-			if (remember.x < 0 && velocity.x > 0) { velocity.x = 0; }
-			if (remember.z > 0 && velocity.z < 0) { velocity.z = 0; }
-			if (remember.z < 0 && velocity.z > 0) { velocity.z = 0; }
+	int forward = (int)buttons[0] - (int)buttons[2];
+	int sides = (int)buttons[3] - (int)buttons[1];
+	if (forward != 0 || sides != 0) {//Move based off facing direction & buttons
+		double angle = ComFunc::GetAngle(glm::vec2(0, 0), ComFunc::GetXZ(camera->GetForward()));
+		glm::vec3 result(cos(angle)*forward + cos(angle + PI/2)*sides, 0, sin(angle)*forward + sin(angle + PI/2)*sides);
+		result = glm::normalize(result) * (float)walkAccel;
+		velocity += result;
+		double dot = glm::dot(result, glm::normalize(velocity));
+		if (glm::length(velocity) > maxWalkSpeed && dot > 0) {
+			velocity -= glm::normalize(velocity) * (float)dot;
 		}
 	}
-}
-
-void Player::Update() {
-	if (enabled && clock() > ticks + TICK) {
-		if (velocity.x != 0 || velocity.y != 0 || velocity.z != 0) {//Faster than finding length of vector
-			Move(velocity);
-		}
-		ticks = clock();
+	if (onGround && (velocity.x != 0 || velocity.z != 0)) {//Apply friction
+		glm::vec3 result(velocity.x, 0, velocity.z);
+		glm::vec3 remember = velocity;
+		result = glm::normalize(result) * (float)friction;
+		velocity -= result;
+		if (remember.x > 0 && velocity.x < 0) { velocity.x = 0; }
+		if (remember.x < 0 && velocity.x > 0) { velocity.x = 0; }
+		if (remember.z > 0 && velocity.z < 0) { velocity.z = 0; }
+		if (remember.z < 0 && velocity.z > 0) { velocity.z = 0; }
 	}
+	velocity.y -= 0.007f;
 }
 
 void Player::Move(glm::vec3 amount) {

@@ -11,7 +11,8 @@ enum EventType {
 	Evt_MouseMotion = 1,
 	Evt_KeyEvent = 2,
 	Evt_MouseClick = 4,
-	Evt_MouseRelease = 8
+	Evt_MouseRelease = 8,
+	Evt_OnTick = 16
 };
 
 class Listener {
@@ -21,6 +22,7 @@ public:
 	virtual void KeyEvent(SDL_Keycode key, bool press) {}
 	virtual void MouseClick(double x, double y, int type) {}
 	virtual void MouseRelease(int type) {}
+	virtual void OnTick() {}
 };
 
 class Events {
@@ -33,4 +35,5 @@ public:
 	static void Send_KeyEvent(SDL_Keycode key, bool press);
 	static void Send_MouseClick(double x, double y, int type);
 	static void Send_MouseRelease(int type);
+	static void Send_OnTick();
 };

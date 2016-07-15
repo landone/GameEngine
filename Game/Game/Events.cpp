@@ -54,6 +54,14 @@ void Events::Send_MouseRelease(int type) {
 	}
 }
 
+void Events::Send_OnTick() {
+	for (std::pair<Listener*, unsigned int>pir : listeners) {
+		if (pir.second & Evt_OnTick) {
+			pir.first->OnTick();
+		}
+	}
+}
+
 void Events::RemoveListener(Listener* listen) {
 	if (listeners.find(listen) != listeners.end()) {
 		listeners.erase(listen);

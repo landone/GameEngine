@@ -1,5 +1,9 @@
 #include "Prop.h"
 
+Prop::Prop() {
+	classname = "Prop";
+}
+
 void Prop::Draw() {
 	if (!enabled) { return; }
 	shader->Bind();

@@ -36,6 +36,8 @@ public:
 	virtual void SetScale(double factor); virtual void Scale(double factor);
 	virtual void SetVel(glm::vec3 amt) { velocity = amt; } virtual void SetVel(double x, double y, double z) { SetVel(glm::vec3(x,y,z)); }
 
+	virtual std::string GetClassname() { return classname; }
+
 	virtual void Enable();
 	virtual void Disable();
 protected:
@@ -45,5 +47,5 @@ protected:
 	Shader* shader = Shader::Global();
 	Camera* camera = Camera::Global();
 	Transform transform;
-	clock_t ticks = 0;
+	std::string classname = "Entity";
 };
