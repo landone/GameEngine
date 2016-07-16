@@ -24,6 +24,7 @@ public:
 	virtual glm::vec3 GetVel() { return velocity; }
 	virtual double GetScale() { return scale; }
 	virtual Transform& GetTransform() { return transform; }
+	virtual Entity* GetParent() { return parent; }
 	virtual bool IsEnabled() { return enabled; }
 
 	virtual void Draw() {}
@@ -38,14 +39,19 @@ public:
 
 	virtual std::string GetClassname() { return classname; }
 
+	virtual void SetParent(Entity& ent, bool offset = false);
+	virtual void RemoveParent() { parent = nullptr; offsActive = false; }
+
 	virtual void Enable();
 	virtual void Disable();
 protected:
 	glm::vec3 position, rotation, velocity;
 	double scale = 1.0;
-	bool enabled = true;
+	bool enabled = true, offsActive = false;
 	Shader* shader = Shader::Global();
 	Camera* camera = Camera::Global();
 	Transform transform;
 	std::string classname = "Entity";
+	Transform offset;
+	Entity* parent = nullptr;
 };

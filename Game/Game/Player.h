@@ -24,7 +24,7 @@ protected:
 
 	bool buttons[5];
 	bool onGround = true;
-	double sensitivity = 20;
+	double sensitivity = 800;
 	double maxWalkSpeed = 0.12, walkAccel = 0.03, friction = 0.015;
 	double height = 0.7, jumpBoost = 0.12;
 };

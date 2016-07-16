@@ -71,6 +71,8 @@ int main() {
 	sprite.Teleport(3, 0.5, 2);
 
 	player.Move(0, 4, 0);
+	spot.Teleport(player.GetEyePos());
+	spot.SetParent(player, true);
 
 	while (display->IsOpen()) {
 		World::Update();

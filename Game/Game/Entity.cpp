@@ -10,9 +10,38 @@ Entity::~Entity() {
 }
 
 void Entity::Update() {
+	if (parent != nullptr) {
+		if (offsActive) {
+			Teleport(offset.GetPos() + parent->GetPos());
+			SetRotation(offset.GetRot() + parent->GetRot());
+		}
+		else {
+			Teleport(parent->GetPos());
+			SetRotation(parent->GetRot());
+		}
+		return;
+	}
 	if (velocity.x != 0 || velocity.y != 0 || velocity.z != 0) {//Faster than finding length of vector
 		Move(velocity);
 	}
+}
+
+void Entity::SetParent(Entity& ent, bool offs) {
+	if (&ent == this) {
+		Console::Warning("Attempted to parent to self!");
+		std::cout << classname << " to " << ent.GetClassname() << std::endl;
+		return;
+	}
+	if (ent.GetParent() == this) {
+		Console::Warning("Attempted to parent self to child!");
+		std::cout << classname << " to " << ent.GetClassname() << std::endl;
+	}
+	offsActive = offs;
+	if (offs) {
+		offset.SetPos(position - ent.GetPos());
+		offset.SetRot(rotation - ent.GetRot());
+	}
+	parent = &ent;
 }
 
 void Entity::Teleport(glm::vec3 pos) {

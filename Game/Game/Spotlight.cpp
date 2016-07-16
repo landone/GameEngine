@@ -2,6 +2,9 @@
 
 Spotlight::Spotlight() {
 	classname = "Spotlight";
+	rotTrans.SetScale(glm::vec3(1, 1, 1));
+	rotTrans.SetPos(glm::vec3(0, 0, 0));
+	rotTrans.SetRot(glm::vec3(0, 0, 0));
 	SendData();
 }
 
@@ -16,6 +19,8 @@ void Spotlight::SetColor(glm::vec3 amount) {
 
 void Spotlight::SetDirection(glm::vec3 amount) {
 	direction = amount;
+	rotTrans.SetPos(glm::vec3(0, 0, 0));
+	rotTrans.SetRot(glm::vec3(0, 0, 0));
 	SendData();
 }
 
@@ -46,6 +51,16 @@ void Spotlight::Move(glm::vec3 amount) {
 	SendData();
 }
 
+void Spotlight::Rotate(glm::vec3 amt) {
+	rotTrans.GetRot() += amt;
+	SendData();
+}
+
+void Spotlight::SetRotation(glm::vec3 amt) {
+	rotTrans.SetRot(amt);
+	SendData();
+}
+
 void Spotlight::Enable() {
 	if (enabled) { return; }
 	enabled = true;
@@ -60,5 +75,8 @@ void Spotlight::Disable() {
 
 void Spotlight::SendData() {
 	if (!enabled) { return; }
-	Shader::SetSpotlight((char*)this, color, direction, intensity, range, radius);
+	//glm::vec3 test = glm::vec3(rotTrans.GetModel() * glm::vec4(direction, 1));
+	//glm::vec3 test = rotTrans.GetRot();
+	//std::cout << test.x << ", " << test.y << ", " << test.z << std::endl;
+	Shader::SetSpotlight((char*)this, color, glm::vec3(rotTrans.GetModel() * glm::vec4(direction, 1)), intensity, range, radius);
 }

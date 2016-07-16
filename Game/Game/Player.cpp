@@ -18,8 +18,10 @@ Player::Player() {
 }
 
 void Player::MouseMotion(double x, double y) {
-	camera->Rotate(x / sensitivity);
-	camera->Yaw(-y / sensitivity);
+	//camera->Rotate(x / sensitivity);
+	//camera->Yaw(-y / sensitivity);
+	camera->Rotate(-y / sensitivity, -x / sensitivity, 0);
+	rotation = camera->GetRot();
 }
 
 void Player::KeyEvent(SDL_Keycode key, bool press) {

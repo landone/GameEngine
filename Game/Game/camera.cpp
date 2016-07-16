@@ -1,5 +1,7 @@
 #include "camera.h"
 
+#define RIGHT_ANGLE		1.553343034274953323f
+
 static Camera global_camera;
 Camera* Camera::Global() {
 	return &global_camera;
@@ -10,28 +12,12 @@ void Camera::ChangeAspect(double W, double H){
 	m_perspective = glm::perspective(m_fov, m_aspect , m_znear, m_zfar);
 }
 
-void Camera::Rotate(double degrees){
-	m_rot += degrees;
-	if (m_rot >= 360){
-		m_rot -= 360;
-	}
-	else if (m_rot < 0){
-		m_rot += 360;
-	}
-
-	m_forward.x = (float)cos(m_rot * PI / 180);
-	m_forward.z = (float)sin(m_rot * PI / 180);
-}
-
-void Camera::Yaw(double degrees){//Bounded at 90 degrees
-	m_yaw += degrees;
-	if (m_yaw > 90){
-		m_yaw = 90;
-	}
-	else if (m_yaw < -90){
-		m_yaw = -90;
-	}
-	m_forward.y = (float)(m_yaw / 45);
+void Camera::Rotate(glm::vec3 amt) {
+	glm::vec3& ref = transform.GetRot();
+	ref += amt;
+	if (ref.x > RIGHT_ANGLE) { ref.x = RIGHT_ANGLE; }
+	if (ref.x < -RIGHT_ANGLE) { ref.x = -RIGHT_ANGLE; }
+	m_forward = glm::vec3(transform.GetModel() * glm::vec4(0, 0, -1, 1));
 }
 
 void Camera::Move(double f, double r){//Forward, Right relative to viewing angle
