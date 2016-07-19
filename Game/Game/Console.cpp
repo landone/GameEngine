@@ -33,3 +33,9 @@ void Console::Error(std::string msg) {
 	ResetColor();
 	PrintLn(msg);
 }
+
+void Console::Log(std::string msg) {
+	SetColor(11);
+	PrintLn(msg);
+	ResetColor();
+}

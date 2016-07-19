@@ -2,26 +2,30 @@
 
 Prism::Prism(double w, double h, double d) {
 	classname = "Prism";
-	dimensions = glm::vec3(w, h, d);
 	walls[0].prismPart = true;
 	walls[1].prismPart = true;
 	walls[2].prismPart = true;
 	walls[3].prismPart = true;
 	walls[4].prismPart = true;
 	walls[5].prismPart = true;
-	walls[0].SetSize(w, d);
 	walls[0].SetRotation(PI / 2, 0, 0);
-	walls[1].SetSize(d, h);
 	walls[1].SetRotation(0, -PI / 2, 0);
-	walls[2].SetSize(w, h);
-	walls[3].SetSize(d, h);
 	walls[3].SetRotation(0, -PI / 2, 0);
-	walls[3].Teleport(w, 0, 0);
-	walls[4].SetSize(w, h);
-	walls[4].Teleport(0, 0, d);
-	walls[5].SetSize(w, d);
 	walls[5].SetRotation(PI / 2, 0, 0);
-	walls[5].Teleport(0, h, 0);
+	SetDimensions(glm::vec3(w, h, d));
+}
+
+void Prism::SetDimensions(glm::vec3 amt) {
+	dimensions = amt;
+	walls[0].SetSize(amt.x, amt.z);
+	walls[1].SetSize(amt.z, amt.y);
+	walls[2].SetSize(amt.x, amt.y);
+	walls[3].SetSize(amt.z, amt.y);
+	walls[3].Teleport(position + glm::vec3(offset.GetModel() * glm::vec4(amt.x, 0.0f, 0.0f, 1.0f)));
+	walls[4].SetSize(amt.x, amt.y);
+	walls[4].Teleport(position + glm::vec3(offset.GetModel() * glm::vec4(0.0f, 0.0f, amt.z, 1.0f)));
+	walls[5].SetSize(amt.x, amt.z);
+	walls[5].Teleport(position + glm::vec3(offset.GetModel() * glm::vec4(0.0f, amt.y, 0.0f, 1.0f)));
 }
 
 void Prism::Draw() {

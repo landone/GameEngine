@@ -16,4 +16,5 @@ public:
 	static void PrintLn(std::string msg);
 	static void Warning(std::string msg);
 	static void Error(std::string msg);
+	static void Log(std::string msg);
 };

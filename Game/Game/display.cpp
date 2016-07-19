@@ -2,6 +2,7 @@
 #include <iostream>
 #include "GL/glew.h"
 #include "Events.h"
+#include "Console.h"
 
 static Display global_disp;
 Display* Display::Global() {
@@ -29,7 +30,7 @@ void Display::Init(int width, int height, const std::string& title) {
 	glContext = SDL_GL_CreateContext(window);
 
 	GLenum status = glewInit();
-	if (status != GLEW_OK) { std::cout << "GLEW FAILED TO INITIALIZE" << std::endl; }
+	if (status != GLEW_OK) { Console::Error("GLEW failed to initialize!"); }
 
 	isClosed = false;
 	fullscr = false;
@@ -43,7 +44,7 @@ void Display::Init(int width, int height, const std::string& title) {
 
 	SDL_ShowCursor(0);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	std::cout << "Display created" << std::endl;
+	Console::Log("Display created");
 }
 
 Display::~Display() {

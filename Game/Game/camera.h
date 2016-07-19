@@ -25,7 +25,6 @@ public:
 		m_rot = 270;
 		m_yaw = 0;
 		m_fov = fov; m_aspect = aspect; m_znear = zNear; m_zfar = zFar;
-		//transform.SetPos(m_forward);
 		transform.SetPos(glm::vec3(0,0,0));
 		transform.SetScale(glm::vec3(1, 1, 1));
 	}
@@ -33,15 +32,12 @@ public:
 	void ChangeAspect(double W, double H);
 	static Camera* Global();
 
-	//void Rotate(double degrees);
-	//void Yaw(double degrees);
 	void Move(double forward, double right = 0);
 	void Teleport(double x, double y, double z);
 
 	inline glm::vec3& GetPos(){ return m_position; }
 	inline glm::vec3& GetForward(){ return m_forward; }
 	inline glm::vec3& GetUp(){ return m_up; }
-	//inline double& GetRot(){ return m_rot; }
 	inline glm::vec3& GetRot() { return transform.GetRot(); }
 
 	void Rotate(glm::vec3 amt); void Rotate(double x, double y, double z) { Rotate(glm::vec3(x, y, z)); }

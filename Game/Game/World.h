@@ -14,7 +14,7 @@ public:
 	static World* World::Global();
 
 	static void Update();
-	static void CalcCollisions();//Maybe make private
+	static void CalcCollisions();
 
 	static void RegEnt(Entity* entity);
 	static void RemoveEnt(Entity* entity);

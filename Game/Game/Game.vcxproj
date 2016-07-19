@@ -135,6 +135,8 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Prism.cpp" />
     <ClCompile Include="Prop.cpp" />
+    <ClCompile Include="ScriptManager.cpp" />
+    <ClCompile Include="Script_GameStart.cpp" />
     <ClCompile Include="shader.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Spotlight.cpp" />
@@ -160,6 +162,8 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Prism.h" />
     <ClInclude Include="Prop.h" />
+    <ClInclude Include="ScriptManager.h" />
+    <ClInclude Include="Script_GameStart.h" />
     <ClInclude Include="shader.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Spotlight.h" />

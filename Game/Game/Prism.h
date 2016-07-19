@@ -23,6 +23,8 @@ public:
 
 	virtual Wall& GetWall(int num);
 	virtual glm::vec3 GetDimensions() { return dimensions; }
+	virtual void SetDimensions(glm::vec3 amt);
+	virtual void SetDimensions(double width, double height, double depth) { SetDimensions(glm::vec3(width, height, depth)); }
 protected:
 	Wall walls[6];
 	Transform offset;
