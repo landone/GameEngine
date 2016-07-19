@@ -35,7 +35,8 @@ void Mesh::Load(const std::string& fileName) {
 	}
 	else {
 		if (!FileExists(path)) {
-			std::cout << "ERROR: Mesh: File \"" << path << "\" does not exist. Mesh load cancelled" << std::endl;
+			Console::Error("Mesh file does not exist:");
+			std::cout <<  path << std::endl;
 			return;
 		}
 		IndexedModel m_model = OBJModel(path).ToIndexedModel();

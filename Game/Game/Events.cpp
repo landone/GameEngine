@@ -62,6 +62,14 @@ void Events::Send_OnTick() {
 	}
 }
 
+void Events::Send_OnPlayerJump() {
+	for (std::pair<Listener*, unsigned int>pir : listeners) {
+		if (pir.second & Evt_OnPlayerJump) {
+			pir.first->OnPlayerJump();
+		}
+	}
+}
+
 void Events::RemoveListener(Listener* listen) {
 	if (listeners.find(listen) != listeners.end()) {
 		listeners.erase(listen);

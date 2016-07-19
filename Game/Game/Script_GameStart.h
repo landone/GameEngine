@@ -13,4 +13,6 @@ private:
 	Prism prism;
 	Texture cube, blue, wood;
 	Ambient amb;
+	Spotlight spot;
+	Sound light, error, radio;
 };

@@ -14,8 +14,10 @@ Script* ScriptManager::Start(int id) {
 		result = new Script;
 		break;
 	}
-	result->SetID(id);
-	scripts.push_back(result);
+	if (result != nullptr) {
+		result->SetID(id);
+		scripts.push_back(result);
+	}
 	return result;
 }
 

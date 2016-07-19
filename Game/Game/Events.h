@@ -12,7 +12,8 @@ enum EventType {
 	Evt_KeyEvent = 2,
 	Evt_MouseClick = 4,
 	Evt_MouseRelease = 8,
-	Evt_OnTick = 16
+	Evt_OnTick = 16,
+	Evt_OnPlayerJump = 32
 };
 
 class Listener {
@@ -23,6 +24,7 @@ public:
 	virtual void MouseClick(double x, double y, int type) {}
 	virtual void MouseRelease(int type) {}
 	virtual void OnTick() {}
+	virtual void OnPlayerJump() {}
 };
 
 class Events {
@@ -36,4 +38,5 @@ public:
 	static void Send_MouseClick(double x, double y, int type);
 	static void Send_MouseRelease(int type);
 	static void Send_OnTick();
+	static void Send_OnPlayerJump();
 };

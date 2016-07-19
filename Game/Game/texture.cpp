@@ -1,5 +1,6 @@
 #include "texture.h"
 #include "stb_image.h"
+#include "Console.h"
 #include <cassert>
 #include <iostream>
 #include <map>
@@ -18,7 +19,8 @@ GLuint CreateTexture(const std::string &fileName) {
 	GLuint result;
 	unsigned char* imageData = stbi_load(fileName.c_str(), &width, &height, &numComp, 4);
 	if (imageData == NULL) {
-		std::cout << "ERROR: Texture file \"" << fileName << "\" doesn't exist. Tex load cancelled." << std::endl;
+		Console::Error("Texture file doesn't exist:");
+		std::cout << fileName << std::endl;
 		return 0;
 	}
 

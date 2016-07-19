@@ -41,12 +41,6 @@ void World::Update() {
 }
 
 void World::Test() {//DEBUG FUNCTION
-	for (Entity* ent : entities) {
-		if (ent->GetClassname() == "Sound") {
-			Sound* snd = (Sound*)ent;
-			snd->Play();
-		}
-	}
 }
 
 void World::RegEnt(Entity* ent) {
@@ -82,30 +76,68 @@ void World::SetPlayer(Entity* ply) {
 	player = (Player*)ply;
 }
 
-void World::CalcCollisions() {//[TODO: ALIGN THIS WITH TICKS & FIX FLOOR SINKING PROBLEM]
+struct WallPair {
+	Wall* ptr;
+	float dist;
+	glm::vec3 point;
+};
+static std::vector<WallPair> orgnzr;
+
+void World::CalcCollisions() {//[TODO: CHECK WALLS FROM CLOSEST TO FURTHEST]
 	if (player != nullptr) {
+		orgnzr.clear();
 		glm::vec3 plpos = player->GetPos(), pleyes = player->GetEyePos(), plvel = player->GetVel();
 		float mag = glm::length(plvel), wrad = 0.33f;
-		glm::vec3 temp;
+		glm::vec3 temp, normal, point, amt;
+		WallPair tempair;
+		bool onground = false;
 		for (Wall* wall : walls) {
-			if (wall == nullptr || wall == 0) { continue; }
+			if (wall == 0 || wall == nullptr) { continue; }
+			tempair.ptr = wall;
 			temp = wall->GetPos();
-			if (glm::distance(temp, plpos) >= sqrt(pow(wall->GetWidth(), 2) + pow(wall->GetHeight(), 2)) + player->GetHeight()) {//If cannot reach, skip this wall [TODO: MAKE THIS A VARIABLE TO LIMIT PROCESSING]
+			glm::vec3 normal = wall->GetNormal();
+			glm::vec3 point = ComFunc::LinePlaneIntersect(normal, temp, plvel, plpos);
+			if (point != plpos && glm::dot(plvel, glm::normalize(point - plpos)) > 0) {
+				tempair.point = point;
+			}else{
 				continue;
 			}
-			glm::vec3 normal = wall->GetNormal();
-			glm::vec3 point = ComFunc::LinePlaneIntersect(normal, temp, plvel, plpos);//FIRST CHECK FOR FEET COLLISION
-			if (point == plpos) { continue; }//Skip if perpendicular
-			if (mag >= glm::distance(point, plpos) - wrad && glm::dot(plvel, glm::normalize(point - plpos)) > 0 && ComFunc::IsPointOnFace(point, temp, wall->GetVert(0), wall->GetVert(2))) {
+			tempair.dist = glm::distance(plpos, point);
+			orgnzr.push_back(tempair);
+		}
+		int size = orgnzr.size();//Create a constant since size may change
+		float tempDist;
+		int id;
+		for (int i = 0; i < size; i++) {
+			tempDist = 0;
+			id = 0;
+			for (unsigned int u = 0; u < orgnzr.size(); u++) {//Find closest
+				if (tempDist == 0 || orgnzr[u].dist < tempDist) {
+					id = u;
+					tempDist = orgnzr[u].dist;
+				}
+			}
+			normal = orgnzr[id].ptr->GetNormal();
+			point = orgnzr[id].point;
+			temp = orgnzr[id].ptr->GetPos();
+			if (mag >= glm::distance(point, plpos) - wrad && ComFunc::IsPointOnFace(point, temp, orgnzr[id].ptr->GetVert(0), orgnzr[id].ptr->GetVert(2))) {
 				//Player is about to run into wall
-				plvel -= normal * glm::dot(plvel, normal);
+				amt = normal * glm::dot(plvel, normal);
+				if (abs(amt.y) > player->GetGravity() / 2) {//If pushing more than half gravity
+					player->SetGroundEnt(orgnzr[id].ptr);
+					onground = true;
+				}
+				plvel -= amt;
 			}
 			point = ComFunc::LinePlaneIntersect(normal, temp, plvel, pleyes);//SECOND CHECK FOR EYE COLLISION
-			if (point == pleyes) { continue; }
-			if (mag >= glm::distance(point, pleyes) - wrad && glm::dot(plvel, glm::normalize(point - pleyes)) > 0 && ComFunc::IsPointOnFace(point, temp, wall->GetVert(0), wall->GetVert(2))) {
-				plvel -= normal * glm::dot(plvel, normal);
+			if (point != pleyes) {
+				if (mag >= glm::distance(point, pleyes) - wrad && glm::dot(plvel, glm::normalize(point - pleyes)) > 0 && ComFunc::IsPointOnFace(point, temp, orgnzr[id].ptr->GetVert(0), orgnzr[id].ptr->GetVert(2))) {
+					plvel -= normal * glm::dot(plvel, normal);
+				}
 			}
+			orgnzr.erase(orgnzr.begin() + id);//Remove from array
 		}
+		if (!onground) { player->SetGroundEnt(nullptr); }
 		player->SetVel(plvel);
 	}
 }
